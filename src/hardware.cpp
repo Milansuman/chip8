@@ -1,0 +1,35 @@
+#include <algorithm>
+#include <vector>
+#include "hardware.hpp"
+
+std::vector<unsigned char> memory;
+std::vector<unsigned short> stack;
+std::vector<std::vector<unsigned char>> framebuffer;
+
+std::vector<unsigned char> V;
+unsigned short I, PC, DT, ST;
+
+void init(){
+    //initializing hardware
+    framebuffer = std::vector<std::vector<unsigned char>>(64, std::vector<unsigned char>(32, 0));
+    V = std::vector<unsigned char>(16);
+
+    //setting up font data 0..F
+    memory.insert(memory.end(), {0xF0, 0x90, 0x90, 0x90, 0xF0});
+    memory.insert(memory.end(), {0x20, 0x60, 0x20, 0x20, 0x70});
+    memory.insert(memory.end(), {0xF0, 0x10, 0xF0, 0x80, 0xF0});
+    memory.insert(memory.end(), {0xF0, 0x10, 0xF0, 0x10, 0xF0});
+    memory.insert(memory.end(), {0x90, 0x90, 0xF0, 0x10, 0x10});
+    memory.insert(memory.end(), {0xF0, 0x80, 0xF0, 0x10, 0xF0});
+    memory.insert(memory.end(), {0xF0, 0x80, 0xF0, 0x90, 0xF0});
+    memory.insert(memory.end(), {0xF0, 0x10, 0x20, 0x40, 0x40});
+    memory.insert(memory.end(), {0xF0, 0x90, 0xF0, 0x90, 0xF0});
+    memory.insert(memory.end(), {0xF0, 0x90, 0xF0, 0x10, 0xF0});
+    memory.insert(memory.end(), {0xF0, 0x90, 0xF0, 0x90, 0xF0});
+    memory.insert(memory.end(), {0xE0, 0x90, 0xE0, 0x90, 0xE0});
+    memory.insert(memory.end(), {0xF0, 0x80, 0x80, 0x80, 0xF0});
+    memory.insert(memory.end(), {0xE0, 0x90, 0x90, 0x90, 0xE0});
+    memory.insert(memory.end(), {0xF0, 0x80, 0xF0, 0x80, 0xF0});
+    memory.insert(memory.end(), {0xF0, 0x80, 0xF0, 0x80, 0x80});
+    std::fill(memory.end(), memory.begin()+4096, 0);
+}
