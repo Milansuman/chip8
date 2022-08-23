@@ -5,7 +5,7 @@
 #include "instructions.hpp"
 #include "hardware.hpp"
 
-//functions will make writing the run function easier
+//these functions will make writing the run function easier
 void prog::sys(unsigned short addr){
     stack.push_back(PC);
     PC = addr;
