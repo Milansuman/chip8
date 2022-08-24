@@ -1,7 +1,6 @@
 #include "hardware.hpp"
 
 int main(){
-    init(); //setup hardware
-    
+    init();
     return 0;
 }

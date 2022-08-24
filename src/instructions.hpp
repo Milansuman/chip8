@@ -1,5 +1,10 @@
 #pragma once
 
+#include <algorithm>
+#include <random>
+#include <vector>
+#include "hardware.hpp"
+
 enum INSTRUCTION{
     SYS,
     CLS,
@@ -75,6 +80,6 @@ namespace prog{
     void ldWriteReg(int reg);
     void ldReadReg(int reg);
 
-    int parse(char& instruciton); //int return type for INSTRUCTION
+    int parse(char& instruciton);
     void run();
 }
