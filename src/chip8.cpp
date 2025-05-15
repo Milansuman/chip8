@@ -14,7 +14,7 @@ Emulator::Emulator(){
 
   this->cpu = CPU(this->vmem);
 
-  this->window = sf::RenderWindow(sf::VideoMode({64*10, 32*10}), "MCHIP 8");
+  this->window = sf::RenderWindow(sf::VideoMode({64*15, 32*15}), "MCHIP 8");
   this->window.setFramerateLimit(60);
 }
 
@@ -27,7 +27,7 @@ void Emulator::execute(){
     }
 
     this->cpu.tick();
-    this->window.clear();
+    this->window.clear(sf::Color(84, 9, 218,255));
     this->draw();
   }
 }
@@ -43,9 +43,9 @@ void Emulator::draw(){
 
       for(int i=0; i<8; i++){
         if(byte & 0b10000000){
-          sf::RectangleShape pixel({10.0f, 10.0f});
-          pixel.setFillColor(sf::Color(255, 255, 255, 255));
-          pixel.setPosition({(float) (x+i)*10, (float) y*10});
+          sf::RectangleShape pixel({15.0f, 15.0f});
+          pixel.setFillColor(sf::Color(187, 251, 255, 255));
+          pixel.setPosition({(float) (x*8+i)*15, (float) y*15});
           this->window.draw(pixel);
         }
         byte <<= 1;
