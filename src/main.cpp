@@ -1,11 +1,10 @@
-#include "cpu.h"
+#include "chip8.h"
 
 int main(){
-  CPU cpu;
+  Emulator chip8;
 
-  cpu.loadBytes((unsigned char[]){0x60, 0xFF, 0x61, 0xFF, 0x80, 0x14}, 6);
-  cpu.displayState();
-  cpu.execute();
-  cpu.displayState();
+  chip8.loadBytes((unsigned char[]){0x60, 0x00, 0x61, 0x00, 0xA0, 0x32, 0xD0, 0x15, 0x60, 0x1F, 0x61, 0x00, 0xD0, 0x15}, 14);
+  chip8.execute();
+  chip8.displayState();
   return 0;
 }
