@@ -6,6 +6,10 @@ A simple CHIP-8 emulator written in C++.
 
 This project is an implementation of a CHIP-8 virtual machine. CHIP-8 is an interpreted programming language, developed by Joseph Weisbecker. It was initially used on the COSMAC VIP and Telmac 1800 8-bit microcomputers in the mid-1970s. CHIP-8 programs are run on a CHIP-8 virtual machine. It was made to allow video games to be more easily programmed for these computers.
 
+## Screenshot
+
+![CHIP-8 Emulator Screenshot](screenshots/test.png)
+
 ## Building and Running
 
 This project uses Meson as its build system.
