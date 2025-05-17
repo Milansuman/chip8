@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 #include "memory.h"
+#include <SFML/Window/Keyboard.hpp>
 
 class CPU{
 private:
@@ -16,7 +17,14 @@ private:
   Memory memory;
   std::shared_ptr<std::vector<unsigned char>> vmem;
 
+  int keyCodeRegister;
+
+  sf::Keyboard::Key getKeyCode(unsigned char value);
+  unsigned char getByte(sf::Keyboard::Key keycode);
 public:
+  bool keyInt;
+  sf::Keyboard::Key pressedKey;
+
   CPU();
   CPU(uint16_t start);
   CPU(std::shared_ptr<std::vector<unsigned char>> vmem);

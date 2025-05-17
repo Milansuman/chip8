@@ -42,10 +42,15 @@ Memory::Memory(){
   });
 
   //Load the font data into memory
-  this->memory.insert(this->memory.begin(), font.begin(), font.end());
+  for(int i=0; i<80; i++){
+    this->memory.at(i) = font.at(i);
+  }
 }
 
 unsigned char Memory::getByte(size_t pos){
+  if(pos >= 4096){
+    return this->memory.at(4095);
+  }
   return this->memory.at(pos);
 }
 
@@ -54,5 +59,7 @@ void Memory::setByte(size_t pos, unsigned char value){
 }
 
 void Memory::loadBytes(const unsigned char* bytes, size_t pos, size_t n){
-  this->memory.insert(this->memory.begin()+pos, bytes, bytes+n);
+  for(size_t i=0; i<n; i++){
+    this->memory.at(pos+i) = *(bytes+i);
+  }
 }

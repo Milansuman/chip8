@@ -2,12 +2,13 @@
 #include "src/cpu.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Window/Event.hpp>
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <memory>
 #include <vector>
-#include <iostream> // Added for std::cout
-#include <iomanip>  // Added for std::hex and std::setw
+#include <iostream>
+#include <iomanip>
 
 Emulator::Emulator(){
   this->vmem = std::shared_ptr<std::vector<unsigned char>>(new std::vector<unsigned char>(256, 0));
@@ -15,17 +16,22 @@ Emulator::Emulator(){
   this->cpu = CPU(this->vmem);
 
   this->window = sf::RenderWindow(sf::VideoMode({64*15, 32*15}), "MCHIP 8");
-  this->window.setFramerateLimit(60);
+  this->window.setFramerateLimit(1000);
 }
 
 void Emulator::execute(){
   while (this->window.isOpen()) {
     while (const std::optional event = this->window.pollEvent()) {
       // Request for closing the window
-      if (event->is<sf::Event::Closed>())
+      if (event->is<sf::Event::Closed>()){
         this->window.close();
+      }else if(const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()){
+        std::cout << "pressed\n";
+        if(this->cpu.keyInt){
+          this->cpu.pressedKey = keyPressed->code;
+        }
+      }
     }
-
     this->cpu.tick();
     this->window.clear(sf::Color(84, 9, 218,255));
     this->draw();
