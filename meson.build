@@ -1,6 +1,6 @@
 project('chip8', 'cpp',
   version : '0.1',
-  default_options : ['warning_level=3', 'cpp_std=c++20', 'b_lundef=false', 'b_debug=true'])
+  default_options : ['warning_level=3', 'cpp_std=c++20', 'b_lundef=false', 'debug=true'])
 
 sfml_dep = dependency('sfml-all', required : true)
 

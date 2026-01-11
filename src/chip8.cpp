@@ -15,16 +15,16 @@ Emulator::Emulator(){
 
   this->cpu = CPU(this->vmem);
 
-  this->window = sf::RenderWindow(sf::VideoMode({64*15, 32*15}), "MCHIP 8");
-  this->window.setFramerateLimit(1000);
+  this->window = std::make_unique<sf::RenderWindow>(sf::VideoMode({64*15, 32*15}), "MCHIP 8");
+  this->window->setFramerateLimit(1000);
 }
 
 void Emulator::execute(){
-  while (this->window.isOpen()) {
-    while (const std::optional event = this->window.pollEvent()) {
+  while (this->window->isOpen()) {
+    while (const std::optional event = this->window->pollEvent()) {
       // Request for closing the window
       if (event->is<sf::Event::Closed>()){
-        this->window.close();
+        this->window->close();
       }else if(const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()){
         std::cout << "pressed\n";
         if(this->cpu.keyInt){
@@ -32,8 +32,10 @@ void Emulator::execute(){
         }
       }
     }
+
+
     this->cpu.tick();
-    this->window.clear(sf::Color(84, 9, 218,255));
+    this->window->clear(sf::Color(84, 9, 218,255));
     this->draw();
   }
 }
@@ -52,13 +54,13 @@ void Emulator::draw(){
           sf::RectangleShape pixel({15.0f, 15.0f});
           pixel.setFillColor(sf::Color(187, 251, 255, 255));
           pixel.setPosition({(float) (x*8+i)*15, (float) y*15});
-          this->window.draw(pixel);
+          this->window->draw(pixel);
         }
         byte <<= 1;
       }
     }
   }
-  this->window.display();
+  this->window->display();
 }
 
 void Emulator::loadBytes(const unsigned char bytes[], size_t n){

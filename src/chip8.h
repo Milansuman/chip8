@@ -9,7 +9,7 @@
 class Emulator{
 private:
   std::shared_ptr<std::vector<unsigned char>> vmem;
-  sf::RenderWindow window;
+  std::unique_ptr<sf::RenderWindow> window;
   CPU cpu;
 
   void draw();
